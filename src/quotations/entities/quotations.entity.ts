@@ -26,7 +26,7 @@ export class Quotation extends CommonEntity {
   // customerRemarks: string;
 
   @ManyToOne(() => Customer, (cust) => cust.quotations, {eager: true})
-  @JoinColumn({name: 'customer_id'})
+  @JoinColumn({name: 'customerId'})
   customer: Customer;
 
   @Column({type: 'jsonb'})

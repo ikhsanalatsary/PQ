@@ -11,6 +11,7 @@ import { CustomersModule } from './customers/customers.module';
 import { Customer } from './customers/entities/customer.entity';
 import { QuotationsModule } from './quotations/quotations.module';
 import { Quotation } from './quotations/entities/quotations.entity';
+import { QuotationResourceOptions } from './quotations/resource.options';
 
 AdminBro.registerAdapter({ Database, Resource });
 
@@ -46,26 +47,7 @@ AdminBro.registerAdapter({ Database, Resource });
               }
             }
           },
-          {
-            resource: Quotation,
-            options: {
-              navigation: {
-                name: 'Quotation Management'
-              },
-              properties: {
-                items: {
-                  type: 'mixed',
-                  isArray: true
-                },
-                'items.description': {
-                  type: 'string'
-                },
-                'items.amount': {
-                  type: 'number'
-                },
-              }
-            }
-          },
+          QuotationResourceOptions,
         ],
       }
     }),
