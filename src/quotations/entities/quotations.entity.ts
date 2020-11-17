@@ -1,6 +1,6 @@
-import { IsEmail } from 'class-validator';
+import { Customer } from 'src/customers/entities/customer.entity';
 import { CommonEntity } from 'src/entities/common.entity';
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
 
 @Entity({name: 'quotations'})
 export class Quotation extends CommonEntity {
@@ -10,23 +10,27 @@ export class Quotation extends CommonEntity {
   @Column()
   title: string;
 
-  @Column({ nullable: true })
-  companyName: string;
+  // @Column({ nullable: true })
+  // companyName: string;
 
-  @Column({ nullable: true })
-  companyInfo: string;
+  // @Column({ nullable: true })
+  // companyInfo: string;
 
-  @Column({ nullable: true })
-  companyContact: string;
+  // @Column({ nullable: true })
+  // companyContact: string;
 
-  @Column({ nullable: true })
-  customerInfo: string;
+  // @Column({ nullable: true })
+  // customerInfo: string;
 
-  @Column({ nullable: true })
-  customerRemarks: string;
+  // @Column({ nullable: true })
+  // customerRemarks: string;
 
-  @Column({type: 'json'})
-  items: [{instruction: string, amount: string}];
+  @ManyToOne(() => Customer, (cust) => cust.quotations, {eager: true})
+  @JoinColumn({name: 'customer_id'})
+  customer: Customer;
+
+  @Column({type: 'jsonb'})
+  items: [{description: string, amount: string}];
 
   @Column()
   tnc: string;
@@ -43,6 +47,6 @@ export class Quotation extends CommonEntity {
   @Column()
   total: string; // vat + subTotal
 
-  @Column()
+  @Column({default: false})
   isIncludedTax: boolean;
 }

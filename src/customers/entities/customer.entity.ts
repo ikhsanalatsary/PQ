@@ -1,6 +1,7 @@
 import { IsEmail } from 'class-validator';
 import { CommonEntity } from 'src/entities/common.entity';
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Quotation } from 'src/quotations/entities/quotations.entity';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 
 @Entity({name: 'customers'})
 export class Customer extends CommonEntity {
@@ -31,4 +32,7 @@ export class Customer extends CommonEntity {
 
   @Column({ nullable: true })
   remarks: string;
+
+  @OneToMany(() => Quotation, quotation => quotation.customer)
+  quotations: Quotation[];
 }

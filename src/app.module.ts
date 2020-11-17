@@ -51,6 +51,18 @@ AdminBro.registerAdapter({ Database, Resource });
             options: {
               navigation: {
                 name: 'Quotation Management'
+              },
+              properties: {
+                items: {
+                  type: 'mixed',
+                  isArray: true
+                },
+                'items.description': {
+                  type: 'string'
+                },
+                'items.amount': {
+                  type: 'number'
+                },
               }
             }
           },
